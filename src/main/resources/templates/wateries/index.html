@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'waters')}">
+
+
+<body>
+<h1>My Wateries!</h1>
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+    <tr th:each="watery : ${wateries}">
+        <td th:text="${watery.wateryName}">Watery Name</td>
+    </tr>
+</table>
+</body>
+</html>

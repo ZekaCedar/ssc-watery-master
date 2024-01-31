@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'waters')}">
+
+<body>
+
+
+<h2>Water Information</h2>
+
+
+<table class="table table-striped" th:object="${water}">
+    <tr>
+        <th>Name</th>
+        <td><b th:text="*{waterName}"></b></td>
+    </tr>
+    <tr>
+        <th>Style</th>
+        <td th:text="*{waterStyle}" /></td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td th:text="*{price}" /></td>
+    </tr>
+    <tr>
+        <th>Min on Hand</th>
+        <td th:text="*{minOnHand}" /></td>
+    </tr>
+    <tr>
+        <th>Quantity to Brew</th>
+        <td th:text="*{quantityToBrew}" /></td>
+    </tr>
+</table>
+
+<a th:href="@{{id}/edit(id=${water.id})}" class="btn btn-default">Edit
+    Water</a>
+<!--<a th:href="@{{id}/pets/new(id=${water.id})}" class="btn btn-default">Delete-->
+    <!--Water</a>-->
+
+<br />
+<br />
+<br />
+<h2>Water Inventory</h2>
+
+<table class="table table-striped">
+
+    <tr th:each="waterInventory : ${water.waterInventory}">
+        <td valign="top">
+            <dl class="dl-horizontal">
+                <dt>Quantity on Hand</dt>
+                <dd th:text="${waterInventory.quantityOnHand}" /></dd>
+            </dl>
+    </tr>
+</table>
+
+</body>
+
+</html>
