@@ -27,11 +27,17 @@ public abstract class WaterOrderLineMapperDecorator implements WaterOrderLineMap
     private WaterRepository waterRepository;
     private WaterOrderLineMapper waterOrderLineMapper;
 
+    /**
+     * @param waterRepository
+     */
     @Autowired
     public void setWaterRepository(WaterRepository waterRepository) {
         this.waterRepository = waterRepository;
     }
 
+    /**
+     * @param waterOrderLineMapper
+     */
     @Autowired
     @Qualifier("delegate")
     public void setWaterOrderLineMapper(WaterOrderLineMapper waterOrderLineMapper) {
