@@ -14,6 +14,30 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 public class WaterControllerIT extends BaseIT{
 
+    @Test
+    void initCreationFormWithAdmin() throws Exception {
+        mockMvc.perform(get("/waters/new").with(httpBasic("spring", "guru")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("waters/createWater"))
+                .andExpect(model().attributeExists("water"));
+    }
+
+    @Test
+    void initCreationForm() throws Exception {
+        mockMvc.perform(get("/waters/new").with(httpBasic("user", "password")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("waters/createWater"))
+                .andExpect(model().attributeExists("water"));
+    }
+
+    @Test
+    void initCreationFormWithScott() throws Exception {
+        mockMvc.perform(get("/waters/new").with(httpBasic("scott", "tiger")))
+                .andExpect(status().isOk())
+                .andExpect(view().name("waters/createWater"))
+                .andExpect(model().attributeExists("water"));
+    }
+
 //    @WithMockUser("spring")
     // also pass @WithMockUser("springanything")
     @Test
