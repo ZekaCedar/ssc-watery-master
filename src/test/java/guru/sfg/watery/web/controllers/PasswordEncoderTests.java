@@ -11,6 +11,15 @@ public class PasswordEncoderTests {
 
     static final String PASSWORD = "password";
 
+    @Test
+    void testBcrypt15(){
+        PasswordEncoder bcrypt = new BCryptPasswordEncoder(15);
+
+        System.out.println(bcrypt.encode(PASSWORD));
+        System.out.println(bcrypt.encode(PASSWORD));
+        System.out.println(bcrypt.encode("tiger"));
+    }
+
     /**
      * Implementation of PasswordEncoder that uses the BCrypt strong hashing function. Clients
      * can optionally supply a "version" ($2a, $2b, $2y) and a "strength" (a.k.a. log rounds in BCrypt)
