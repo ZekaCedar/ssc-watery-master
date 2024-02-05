@@ -127,7 +127,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.inMemoryAuthentication()
                 .withUser("scott")
-                .password("{bcrypt15}$2a$15$DLiP65r9AqXZlpK6DvyuE.7/o7qyCfFH71PB9FtroeK98ypBIB7KS")
+                .password("{bcrypt10}$2a$10$fHvGzYfaM2RO2qEhr8Uy6eFjzmXv1YrOgmbqOAFkKZJzvjAgS8ixy")
+//                .password("{bcrypt15}$2a$15$DLiP65r9AqXZlpK6DvyuE.7/o7qyCfFH71PB9FtroeK98ypBIB7KS")
 //                .password("{ldap}{SSHA}MJjG3r3FwUEr5qqhACnuNjA28CeILn2mZGXFFw==")
 //                .password("{noop}tiger")
 //                .password("tiger")
