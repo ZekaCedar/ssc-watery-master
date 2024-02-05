@@ -56,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests(authorize -> {
                     authorize
+                            .antMatchers("/h2-console/**").permitAll() //do not use in production!
                             .antMatchers("/", "/webjars/**", "/login", "/resources/**").permitAll()
                             .antMatchers("/waters/find","/waters*").permitAll()
                             .antMatchers(HttpMethod.GET, "/api/v1/water/**").permitAll()
@@ -69,7 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic();
 
-
+        // h2 console config
+        http.headers().frameOptions().sameOrigin();
     }
 
     /**
@@ -115,35 +117,36 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @param auth the {@link AuthenticationManagerBuilder} to use
      * @throws Exception
      */
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("spring")
-                .password("{bcrypt}$2a$10$HQbYwdw6AP5nmkTTfOpGh.2ahlSz.UXvEQA6M4CXTLkDrK0ZNAina")
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+//        auth.inMemoryAuthentication()
+//                .withUser("spring")
+//                .password("{bcrypt}$2a$10$HQbYwdw6AP5nmkTTfOpGh.2ahlSz.UXvEQA6M4CXTLkDrK0ZNAina")
 //                .password("1819626f312a4cd55f1e83bbe95d5413cb3f02e07c12bdfa319567019ee5363637ceba07ab9cc2e5")
 //                .password("{SSHA}H0AMNQn3XaUvvuSJvyd4sZ9Zb/QPrOcstt0lig==")
 //                .password("{noop}guru")
 //                .password("guru")
-                .roles("ADMIN")
-                .and()
-                .withUser("user")
-                .password("{sha256}d00474a98723afa963d6eead60edf6210648b47c00fd9c3491b273c3fbf13b63a0d1d8ba2c248f7c")
+//                .roles("ADMIN")
+//                .and()
+//                .withUser("user")
+//                .password("{sha256}d00474a98723afa963d6eead60edf6210648b47c00fd9c3491b273c3fbf13b63a0d1d8ba2c248f7c")
 //                .password("$2a$10$4XMVzUKbgNEvXygLteOq3e62qDuVsVBDEt6YSx6O8GPUy7JlyWjKa")
 //                .password("f0db6ef825ac0965d19f4427788bb18e289dd45714bd6f2e70e540922bb74c5f8012d18dc9e020e5")
 //                .password("{SSHA}H0AMNQn3XaUvvuSJvyd4sZ9Zb/QPrOcstt0lig==")
 //                .password("{noop}password")
-//                .password("password")
-                .roles("USER");
+////                .password("password")
+//                .roles("USER");
 
-        auth.inMemoryAuthentication()
-                .withUser("scott")
-                .password("{bcrypt10}$2a$10$fHvGzYfaM2RO2qEhr8Uy6eFjzmXv1YrOgmbqOAFkKZJzvjAgS8ixy")
+//        auth.inMemoryAuthentication()
+//                .withUser("scott")
+//                .password("{bcrypt10}$2a$10$fHvGzYfaM2RO2qEhr8Uy6eFjzmXv1YrOgmbqOAFkKZJzvjAgS8ixy")
 //                .password("{bcrypt15}$2a$15$DLiP65r9AqXZlpK6DvyuE.7/o7qyCfFH71PB9FtroeK98ypBIB7KS")
 //                .password("{ldap}{SSHA}MJjG3r3FwUEr5qqhACnuNjA28CeILn2mZGXFFw==")
 //                .password("{noop}tiger")
 //                .password("tiger")
-                .roles("CUSTOMER");
-    }
+//                .roles("CUSTOMER");
+//    }
 
     /**
      * Creates a {@link DelegatingPasswordEncoder} with default mappings. Additional
