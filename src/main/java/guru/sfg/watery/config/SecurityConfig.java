@@ -1,6 +1,7 @@
 package guru.sfg.watery.config;
 
 import guru.sfg.watery.security.RestHeaderAuthFilter;
+import guru.sfg.watery.security.RestUrlAuthFilter;
 import guru.sfg.watery.security.SfgPasswordEncoderFactories;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -33,16 +34,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return filter;
     }
 
+    public RestUrlAuthFilter restUrlAuthFilter(AuthenticationManager authenticationManager){
+        RestUrlAuthFilter filter = new RestUrlAuthFilter(new AntPathRequestMatcher("/api/**"));
+        filter.setAuthenticationManager(authenticationManager);
+        return filter;
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         // Set to Use Customize Authentication filter
         // Add this filter in the filter chain just before the UsernamePasswordAuthenticationFilter
+        // .csrf().disable() is globally disabled
         http.addFilterBefore(restHeaderAuthFilter(authenticationManager()),
                 UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
 
+        http.addFilterBefore(restUrlAuthFilter(authenticationManager()),
+                UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeRequests(authorize -> {
                     authorize
