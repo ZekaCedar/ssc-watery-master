@@ -60,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                             .antMatchers("/", "/webjars/**", "/login", "/resources/**").permitAll()
                             .antMatchers("/waters/find","/waters*").permitAll()
                             .antMatchers(HttpMethod.GET, "/api/v1/water/**").permitAll()
+                            .mvcMatchers(HttpMethod.DELETE,"/api/v1/water/**").hasRole("ADMIN")
+                            .mvcMatchers(HttpMethod.GET,"/watery/wateries", "/watery/api/v1/wateries").hasRole("CUSTOMER")
                             .mvcMatchers(HttpMethod.GET, "/api/v1/waterUpc/{upc}").permitAll();
                 })
                 .authorizeRequests()
